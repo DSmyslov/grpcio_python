@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package tutorial;
+
+service JustAnotherService {
+
+  // simple RPC
+  rpc DoSomeMath(MathRequest) returns (MathResponse) {}
+
+  // response-streaming RPC
+  rpc ListAnimeByTitle(AnimeTitle) returns (stream Anime) {}
+
+  // request-streaming RPC
+  rpc FloodWithMessages(stream Message) returns (Message) {}
+
+  // bidirectionally-streaming RPC
+  rpc SquareTheNumbers(stream Number) returns (stream Number) {}
+
+}
+
+message MathRequest {
+  int32 x = 1;
+  int32 y = 2;
+  string op = 3;
+}
+
+message MathResponse {
+  string ans = 1;
+}
+
+message AnimeTitle {
+  string title = 1;
+}
+
+message Anime {
+  string title = 1;
+  float score = 2;
+  optional bool sfw = 3;
+  optional string date = 4;
+}
+
+message Message {
+  string from = 1;
+  string to = 2;
+  string msg = 3;
+  optional string date = 4;
+}
+
+message Number {
+  int64 x = 1;
+}
